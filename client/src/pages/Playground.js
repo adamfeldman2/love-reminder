@@ -1,5 +1,4 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
@@ -7,17 +6,24 @@ import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import TextField from 'material-ui/TextField';
+import Snackbar from 'material-ui/Snackbar';
+
+const { DateTimeFormat } = global.Intl;
 
 class Playground extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      snackBarOpen: false
     };
 
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleSaveProgress = this.handleSaveProgress.bind(this);
+    this.handleSnackBarRequestClose = this.handleSnackBarRequestClose.bind(this);
   }
 
   handleOpen() {
@@ -32,6 +38,22 @@ class Playground extends React.Component {
     this.setState(() => {
       return {
         open: false
+      };
+    });
+  }
+
+  handleSaveProgress() {
+    this.setState(() => {
+      return {
+        snackBarOpen: true
+      };
+    });
+  }
+
+  handleSnackBarRequestClose() {
+    this.setState(() => {
+      return {
+        snackBarOpen: false
       };
     });
   }
@@ -53,16 +75,6 @@ class Playground extends React.Component {
 
     return (
       <div className="wrapper-page-playground">
-        <AppBar title="Title" iconClassNameRight="muidocs-icon-navigation-expand-more" />
-
-        <DatePicker hintText="Date" />
-
-        <IconButton tooltip="It's a hand lizard!" tooltipPosition="top-center" style={iconButtonStyle}>
-          <FontIcon className="muidocs-icon-action-home">
-            <i className="fa fa-hand-lizard-o" aria-hidden="true" />
-          </FontIcon>
-        </IconButton>
-
         <RaisedButton style={buttonStyle} label="Open Modal" onClick={this.handleOpen} />
         <Dialog
           title="Dialog With Actions"
@@ -73,39 +85,201 @@ class Playground extends React.Component {
         >
           The actions in this window were passed in as an array of React objects.
         </Dialog>
-
         <Tabs>
-          <Tab label="Item 1">
-            <h1>This is item 1</h1>
+          <Tab label="1-100">
+            <h1>1 to 100</h1>
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 1"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 2"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 3"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 4"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 5"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 6"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 7"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 8"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 9"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 10"
+              fullWidth={true}
+            />
           </Tab>
-          <Tab label="Item 2">
-            <h1>This is item 2</h1>
+          <Tab label="101-200">
+            <h1>101 to 200</h1>
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 101"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 102"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 103"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 104"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 105"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 106"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 107"
+              fullWidth={true}
+            />
           </Tab>
-          <Tab label="Item 3">
-            <h1>This is item 3</h1>
+          <Tab label="201-300">
+            <h1>201 to 300</h1>
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 201"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 202"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 203"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 204"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 205"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 206"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 207"
+              fullWidth={true}
+            />
           </Tab>
-          <Tab label="Item 4">
-            <h1>This is item 4</h1>
-          </Tab>
-          <Tab label="Item 5">
-            <h1>This is item 5</h1>
-          </Tab>
-          <Tab label="Item 6">
-            <h1>This is item 6</h1>
-          </Tab>
-          <Tab label="Item 7">
-            <h1>This is item 7</h1>
-          </Tab>
-          <Tab label="Item 8">
-            <h1>This is item 8</h1>
-          </Tab>
-          <Tab label="Item 9">
-            <h1>This is item 9</h1>
-          </Tab>
-          <Tab label="Item 10">
-            <h1>This is item 10</h1>
+          <Tab label="301-365">
+            <h1>301 to 365</h1>
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 301"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 302"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 303"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 304"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 305"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 306"
+              fullWidth={true}
+            />
+            <TextField
+              hintText="Tell them what you love about them. Keep it short and sweet!"
+              floatingLabelText="Day 307"
+              fullWidth={true}
+            />
           </Tab>
         </Tabs>
+        <RaisedButton label="Save Progress" primary={true} onClick={this.handleSaveProgress} />
+        <br />
+        Choose a start date:
+        <DatePicker
+          hintText="Date"
+          autoOk={true}
+          disableYearSelection={true}
+          formatDate={
+            new DateTimeFormat('en-US', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            }).format
+          }
+        />
+        <IconButton tooltip="It's a hand lizard!" tooltipPosition="top-center" style={iconButtonStyle}>
+          <FontIcon className="muidocs-icon-action-home">
+            <i className="fa fa-hand-lizard-o" aria-hidden="true" />
+          </FontIcon>
+        </IconButton>
+        <Snackbar
+          open={this.state.snackBarOpen}
+          message="Progress Saved"
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackBarRequestClose}
+        />
       </div>
     );
   }

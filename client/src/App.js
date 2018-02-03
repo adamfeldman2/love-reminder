@@ -1,10 +1,11 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppRouter from './routers/AppRouter';
+import store from './store/store';
 import './styles/App.css';
 
-// console.log(getMuiTheme().baseTheme.palette);
 const customTheme = getMuiTheme({
   fontFamily: 'Montserrat, sans-serif',
   palette: {
@@ -18,9 +19,11 @@ const customTheme = getMuiTheme({
 
 const App = () => {
   return (
-    <MuiThemeProvider muiTheme={customTheme}>
-      <AppRouter />
-    </MuiThemeProvider>
+    <Provider store={store()}>
+      <MuiThemeProvider muiTheme={customTheme}>
+        <AppRouter />
+      </MuiThemeProvider>
+    </Provider>
   );
 };
 
