@@ -1,10 +1,10 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import AppRouter from './routers/AppRouter';
-import store from './store/store';
+import { connect } from 'react-redux';
+import { startFetchUser } from './actions/auth';
 import './styles/App.css';
+import Router from './routers/router';
 
 const customTheme = getMuiTheme({
   fontFamily: 'Montserrat, sans-serif',
@@ -17,14 +17,26 @@ const customTheme = getMuiTheme({
   }
 });
 
-const App = () => {
-  return (
-    <Provider store={store()}>
+class App extends React.Component {
+  componentDidMount() {
+    this.props.startFetchUser();
+  }
+
+  render() {
+    return (
       <MuiThemeProvider muiTheme={customTheme}>
-        <AppRouter />
+        <Router />
       </MuiThemeProvider>
-    </Provider>
-  );
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startFetchUser: () => {
+      dispatch(startFetchUser());
+    }
+  };
 };
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);

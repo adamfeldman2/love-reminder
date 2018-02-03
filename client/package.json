@@ -9,6 +9,7 @@
     "eslint-plugin-react": "^7.5.1"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "material-ui": "^0.20.0",
     "moment": "^2.20.1",
     "node-sass-chokidar": "0.0.3",
@@ -24,7 +25,8 @@
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
@@ -34,6 +36,9 @@
   },
   "proxy": {
     "/auth/google": {
+      "target": "http://localhost:5000"
+    },
+    "/api/*": {
       "target": "http://localhost:5000"
     }
   }

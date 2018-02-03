@@ -11,11 +11,25 @@ class SaveProgressButton extends React.Component {
   }
 
   render() {
-    const saveButtonStyle = {
+    const style = {
       position: 'fixed',
       right: '5%',
       bottom: '5%',
       zIndex: '1'
+    };
+
+    const labelStyle = {
+      padding: '16px'
+    };
+
+    const overlayStyle = {
+      display: 'flex',
+      alignItems: 'center',
+      height: '41px' // match buttonStyle.height value
+    };
+
+    const buttonStyle = {
+      height: '41px'
     };
 
     return (
@@ -23,7 +37,10 @@ class SaveProgressButton extends React.Component {
         className="material-save-progress-button"
         label="Save Progress"
         primary={true}
-        style={saveButtonStyle}
+        style={style}
+        overlayStyle={overlayStyle}
+        labelStyle={labelStyle}
+        buttonStyle={buttonStyle}
       />
     );
   }

@@ -1,7 +1,8 @@
 @import './partials/_variables';
 @import './partials/_normalize';
 
+@import './partials/components/_Header';
 @import './partials/components/_Reminders';
 
-@import './partials/pages/_Home';
+@import './partials/pages/Landing';
 @import './partials/pages/_Playground';
