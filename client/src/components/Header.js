@@ -5,11 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 const Header = () => {
   return (
     <div className="wrapper-component-header">
-      <AppBar
-        title="Web App"
-        iconClassNameRight="muidocs-icon-navigation-expand-more"
-        iconElementRight={<FlatButton label="Login" />}
-      />
+      <AppBar title="Web App" iconElementRight={<FlatButton label="Login" />} />
     </div>
   );
 };
