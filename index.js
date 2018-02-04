@@ -25,7 +25,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/auth')(app, bodyParser, passport);
+require('./routes/auth')(app, bodyParser, passport, mongoose);
+require('./routes/reminders')(app, bodyParser, mongoose);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

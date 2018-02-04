@@ -1,4 +1,6 @@
-module.exports = (app, bodyParser, passport) => {
+module.exports = (app, bodyParser, passport, mongoose) => {
+  const User = mongoose.model('users');
+
   // Body Parser Middleware
   app.use(
     bodyParser.urlencoded({

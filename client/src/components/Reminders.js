@@ -1,7 +1,9 @@
 import React from 'react';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import { connect } from 'react-redux';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
+import { startStoreReminders } from '../actions/reminders';
 
 class Reminders extends React.Component {
   constructor(props) {
@@ -12,17 +14,15 @@ class Reminders extends React.Component {
       tab2Active: false,
       tab3Active: false,
       tab4Active: false,
-      tab5Active: false
+      tab5Active: false,
+      reminders: []
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(e, name) {
-    const val = e.target.value;
-    this.setState(() => {
-      return {
-        [name]: val
-      };
-    });
+  onSaveProgress() {
+    this.props.startStoreReminders(this.props.reminders, this.state.reminders);
   }
 
   buildInputs(firstNum, lastNum) {
@@ -37,6 +37,15 @@ class Reminders extends React.Component {
       );
     }
     return inputs;
+  }
+
+  handleInputChange(e, name) {
+    const val = e.target.value;
+    this.setState((prevState) => {
+      return {
+        reminders: { ...prevState.reminders, ...{ [name]: val } }
+      };
+    });
   }
 
   render() {
@@ -113,10 +122,24 @@ class Reminders extends React.Component {
           </Tab>
         </Tabs>
 
-        <SaveProgressButton />
+        <SaveProgressButton onClick={() => this.onSaveProgress()} />
       </div>
     );
   }
 }
 
-export default Reminders;
+const mapStateToProps = (state) => {
+  return {
+    reminders: state.reminders
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startStoreReminders: (currentRemindersState, updatedReminders) => {
+      dispatch(startStoreReminders(currentRemindersState, updatedReminders));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reminders);
