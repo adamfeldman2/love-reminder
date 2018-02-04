@@ -14,7 +14,13 @@ module.exports = (app, bodyParser, passport) => {
     })
   );
 
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/' }),
+    (req, res) => {
+      res.redirect('/dashboard');
+    }
+  );
 
   app.get('/api/logout', (req, res) => {
     req.logout();
