@@ -29,8 +29,8 @@ const startStoreReminders = (currentRemindersState, updatedReminders) => {
     axios
       .post('/api/update_reminders', { reminders: currentRemindersState })
       .then((res) => {
-        // if status is OK, dispatch storeReminders
-        if (res.statusText === 'OK') {
+        // if success status is true, dispatch storeReminders
+        if (res.data.success) {
           dispatch(storeReminders(currentRemindersState));
         }
       })

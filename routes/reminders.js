@@ -10,8 +10,17 @@ module.exports = (app, bodyParser, mongoose) => {
   app.use(bodyParser.json());
 
   app.post('/api/update_reminders', (req, res) => {
-    console.log('REQ 🍕:', req.body.reminders);
+    const id = req.user._id;
+    const updatedRemindersArr = { reminders: req.body.reminders };
 
-    res.send({ message: 'Reminders saved!' });
+    User.findByIdAndUpdate(id, updatedRemindersArr)
+      .then(() => {
+        console.log('Reminders were updated and saved! ');
+        res.send({ success: true });
+      })
+      .catch((err) => {
+        console.log('Reminders were not updated and saved: ', err);
+        res.send({ success: false });
+      });
   });
 };
