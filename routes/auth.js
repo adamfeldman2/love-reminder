@@ -24,10 +24,7 @@ module.exports = (app, bodyParser, passport) => {
 
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send({
-      message: 'User has been logged out',
-      user: req.user
-    });
+    res.redirect('/');
   });
 
   app.get('/api/current_user', (req, res) => {

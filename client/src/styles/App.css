@@ -206,6 +206,12 @@ body {
   display: flex;
   align-items: center; }
 
+.wrapper-component-menu a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center; }
+
 .wrapper-page-landing .wrapper-content h2 {
   font-size: 2.7em;
   text-align: center;

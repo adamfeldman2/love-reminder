@@ -3,8 +3,27 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Menu from './Menu';
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      menuOpen: false
+    };
+
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  toggleMenu() {
+    this.setState((prevState) => {
+      return {
+        menuOpen: !prevState.menuOpen
+      };
+    });
+  }
+
   renderContent(labelStyle) {
     switch (this.props.auth) {
       case null:
@@ -41,22 +60,27 @@ class Header extends React.Component {
       <div className="wrapper-component-header">
         <AppBar
           title={
-            <Link className="title" to="/">
+            <Link className="title" to={this.props.auth ? '/dashboard' : '/'}>
               Web App
             </Link>
           }
+          onLeftIconButtonClick={this.toggleMenu}
         >
           <ul className="wrapper-right-side-buttons">
-            <li>
-              {/* <FlatButton
-                label="Login With Google"
-                labelStyle={labelStyle}
-                primary
-              /> */}
-              {this.renderContent(labelStyle)}
-            </li>
+            <li>{this.renderContent(labelStyle)}</li>
           </ul>
         </AppBar>
+
+        <Menu
+          isOpen={this.state.menuOpen}
+          onCloseRequest={() => {
+            this.setState(() => {
+              return {
+                menuOpen: false
+              };
+            });
+          }}
+        />
       </div>
     );
   }

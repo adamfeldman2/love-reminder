@@ -31,7 +31,7 @@ module.exports = (passport, keys, mongoose) => {
 
         const newUser = await new User({
           googleId: profile.id,
-          displayName: profile.displayName,
+          givenName: profile.name.givenName,
           email: profile.emails[0].value
         }).save();
         done(null, newUser);
