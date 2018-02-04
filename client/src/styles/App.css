@@ -202,6 +202,10 @@ body {
 .wrapper-component-header .title {
   color: #fff; }
 
+.wrapper-component-header .wrapper-right-side-buttons {
+  display: flex;
+  align-items: center; }
+
 .wrapper-page-landing .wrapper-content h2 {
   font-size: 2.7em;
   text-align: center;

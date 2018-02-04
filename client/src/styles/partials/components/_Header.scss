@@ -2,4 +2,9 @@
   .title {
     color: $white;
   }
+
+  .wrapper-right-side-buttons {
+    display: flex;
+    align-items: center;
+  }
 }
