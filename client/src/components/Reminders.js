@@ -3,7 +3,7 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import { connect } from 'react-redux';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
-import { startStoreReminders } from '../actions/reminders';
+import { startStoreReminders, remindersSaved } from '../actions/reminders';
 
 class Reminders extends React.Component {
   constructor(props) {
@@ -22,7 +22,10 @@ class Reminders extends React.Component {
   }
 
   onSaveProgress() {
-    this.props.startStoreReminders(this.props.reminders, this.state.reminders);
+    this.props.startStoreReminders(
+      this.props.remindersArr,
+      this.state.reminders
+    );
   }
 
   buildInputs(firstNum, lastNum) {
@@ -46,6 +49,11 @@ class Reminders extends React.Component {
         reminders: { ...prevState.reminders, ...{ [name]: val } }
       };
     });
+
+    // check if all new updates to reminders has been saved, if not, set remindersSaved to false, otherwise do nothing
+    if (this.props.isRemindersSaved) {
+      this.props.remindersSaved(false);
+    }
   }
 
   render() {
@@ -130,7 +138,8 @@ class Reminders extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    reminders: state.reminders.remindersArr
+    remindersArr: state.reminders.remindersArr,
+    isRemindersSaved: state.reminders.remindersSaved
   };
 };
 
@@ -138,6 +147,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     startStoreReminders: (currentRemindersState, updatedReminders) => {
       dispatch(startStoreReminders(currentRemindersState, updatedReminders));
+    },
+    remindersSaved: (saved) => {
+      dispatch(remindersSaved(saved));
     }
   };
 };

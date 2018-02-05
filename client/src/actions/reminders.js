@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+const remindersSaved = (saved) => {
+  return {
+    type: 'REMINDERS_SAVED',
+    saved
+  };
+};
+
 const storeReminders = (reminders) => {
   return {
     type: 'STORE_REMINDERS',
@@ -10,8 +17,6 @@ const storeReminders = (reminders) => {
 const startStoreReminders = (currentRemindersState, updatedReminders) => {
   return (dispatch) => {
     const updatedReminderEntries = Object.entries(updatedReminders);
-    console.log('currentRemindersState:', currentRemindersState);
-    console.log('updatedReminders:', updatedReminders);
 
     // loop over all reminder inputs with a value
     for (let i = 0; i < Object.keys(updatedReminders).length; i++) {
@@ -34,6 +39,8 @@ const startStoreReminders = (currentRemindersState, updatedReminders) => {
         // if success status is true, dispatch storeReminders
         if (res.data.success) {
           dispatch(storeReminders(currentRemindersState));
+          // set remindersSaved to true
+          dispatch(remindersSaved(true));
         }
       })
       .catch((err) => {
@@ -42,4 +49,4 @@ const startStoreReminders = (currentRemindersState, updatedReminders) => {
   };
 };
 
-export { startStoreReminders };
+export { startStoreReminders, remindersSaved };
