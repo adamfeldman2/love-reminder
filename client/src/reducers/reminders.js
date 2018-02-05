@@ -5,13 +5,13 @@ const defaultState = () => {
     arr.push({ label: `day${i + 1}`, text: '', sendDate: null });
   }
 
-  return arr;
+  return { remindersArr: arr };
 };
 
 const remindersReducer = (state = defaultState(), action) => {
   switch (action.type) {
     case 'STORE_REMINDERS':
-      return [...action.reminders];
+      return { ...state, remindersArr: [...action.reminders] };
 
     default:
       return state;

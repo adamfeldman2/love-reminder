@@ -9,7 +9,9 @@ const storeReminders = (reminders) => {
 
 const startStoreReminders = (currentRemindersState, updatedReminders) => {
   return (dispatch) => {
-    let updatedReminderEntries = Object.entries(updatedReminders);
+    const updatedReminderEntries = Object.entries(updatedReminders);
+    console.log('currentRemindersState:', currentRemindersState);
+    console.log('updatedReminders:', updatedReminders);
 
     // loop over all reminder inputs with a value
     for (let i = 0; i < Object.keys(updatedReminders).length; i++) {

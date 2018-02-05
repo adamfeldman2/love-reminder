@@ -130,7 +130,7 @@ class Reminders extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    reminders: state.reminders
+    reminders: state.reminders.remindersArr
   };
 };
 
