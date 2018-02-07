@@ -1,8 +1,14 @@
 import React from 'react';
-import Dashboard from '../components/Reminders';
+import Reminders from '../components/Reminders';
+import DatePicker from '../components/DatePicker';
 
-const Reminders = () => {
-  return <Reminders />;
+const Dashboard = () => {
+  return (
+    <div>
+      <DatePicker />
+      <Reminders />
+    </div>
+  );
 };
 
 export default Dashboard;

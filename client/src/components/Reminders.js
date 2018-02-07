@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
-import { startStoreReminders, remindersSaved } from '../actions/reminders';
+import { storeReminders, startStoreReminders, remindersSaved } from '../actions/reminders';
 
 class Reminders extends React.Component {
   constructor(props) {
@@ -41,6 +41,8 @@ class Reminders extends React.Component {
     } else {
       reminders = data;
     }
+
+    this.props.storeReminders(reminders);
 
     this.setState(() => {
       return {
@@ -82,13 +84,17 @@ class Reminders extends React.Component {
   }
 
   render() {
+    const tabsStyle = {
+      fontSize: '.95em'
+    };
+
     const tabStyle = {
       fontSize: '1.03em'
     };
 
     return (
       <div className="component-reminders">
-        <Tabs style={tabStyle}>
+        <Tabs style={tabsStyle}>
           {/* 1-72 */}
           <Tab
             onActive={() => {
@@ -170,6 +176,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    storeReminders: (reminders) => {
+      dispatch(storeReminders(reminders));
+    },
+
     startStoreReminders: (currentRemindersState, updatedReminders) => {
       dispatch(startStoreReminders(currentRemindersState, updatedReminders));
     },

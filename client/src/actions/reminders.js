@@ -1,4 +1,5 @@
 import axios from 'axios';
+import updateSendDates from '../utils/updateSendDates';
 
 const remindersSaved = (saved) => {
   return {
@@ -14,7 +15,7 @@ const storeReminders = (reminders) => {
   };
 };
 
-const startStoreReminders = (updatedRemindersArr) => {
+const startStoreReminders = (updatedRemindersArr, save = true) => {
   return (dispatch) => {
     // make call to api
     axios
@@ -23,8 +24,11 @@ const startStoreReminders = (updatedRemindersArr) => {
         // if success status is true, dispatch storeReminders
         if (res.data.success) {
           dispatch(storeReminders(updatedRemindersArr));
-          // set remindersSaved to true
-          dispatch(remindersSaved(true));
+
+          if (save) {
+            // set remindersSaved to true
+            dispatch(remindersSaved(true));
+          }
         }
       })
       .catch((err) => {
@@ -33,4 +37,12 @@ const startStoreReminders = (updatedRemindersArr) => {
   };
 };
 
-export { startStoreReminders, remindersSaved };
+const startSetDates = (startDate, currentRemindersArr) => {
+  const reminders = updateSendDates(startDate, currentRemindersArr);
+
+  return (dispatch) => {
+    dispatch(startStoreReminders(reminders, false));
+  };
+};
+
+export { storeReminders, startStoreReminders, remindersSaved, startSetDates };

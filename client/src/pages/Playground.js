@@ -1,13 +1,10 @@
 import React from 'react';
-import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
-
-const { DateTimeFormat } = global.Intl;
 
 class Playground extends React.Component {
   constructor(props) {
@@ -21,9 +18,7 @@ class Playground extends React.Component {
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSaveProgress = this.handleSaveProgress.bind(this);
-    this.handleSnackBarRequestClose = this.handleSnackBarRequestClose.bind(
-      this
-    );
+    this.handleSnackBarRequestClose = this.handleSnackBarRequestClose.bind(this);
   }
 
   handleOpen() {
@@ -70,21 +65,12 @@ class Playground extends React.Component {
 
     const actions = [
       <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onClick={this.handleClose}
-      />
+      <FlatButton label="Submit" primary={true} keyboardFocused={true} onClick={this.handleClose} />
     ];
 
     return (
       <div className="wrapper-page-playground">
-        <RaisedButton
-          style={buttonStyle}
-          label="Open Modal"
-          onClick={this.handleOpen}
-        />
+        <RaisedButton style={buttonStyle} label="Open Modal" onClick={this.handleOpen} />
         <Dialog
           title="Dialog With Actions"
           actions={actions}
@@ -92,33 +78,12 @@ class Playground extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          The actions in this window were passed in as an array of React
-          objects.
+          The actions in this window were passed in as an array of React objects.
         </Dialog>
-        <RaisedButton
-          label="Save Progress"
-          primary={true}
-          onClick={this.handleSaveProgress}
-        />
+        <RaisedButton label="Save Progress" primary={true} onClick={this.handleSaveProgress} />
         <br />
-        Choose a start date:
-        <DatePicker
-          hintText="Date"
-          autoOk={true}
-          disableYearSelection={true}
-          formatDate={
-            new DateTimeFormat('en-US', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            }).format
-          }
-        />
-        <IconButton
-          tooltip="It's a hand lizard!"
-          tooltipPosition="top-center"
-          style={iconButtonStyle}
-        >
+
+        <IconButton tooltip="It's a hand lizard!" tooltipPosition="top-center" style={iconButtonStyle}>
           <FontIcon className="muidocs-icon-action-home">
             <i className="fa fa-hand-lizard-o" aria-hidden="true" />
           </FontIcon>

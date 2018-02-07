@@ -5,7 +5,10 @@ const defaultState = () => {
     arr.push({ label: `day${i + 1}`, text: '', sendDate: null });
   }
 
-  return { remindersArr: arr, remindersSaved: 'no changes' };
+  return {
+    remindersArr: arr,
+    remindersSaved: 'no changes'
+  };
 };
 
 const remindersReducer = (state = defaultState(), action) => {
