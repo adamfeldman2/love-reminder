@@ -16,7 +16,7 @@ class Reminders extends React.Component {
       tab3Active: false,
       tab4Active: false,
       tab5Active: false,
-      reminders: []
+      reminders: this.props.remindersArr
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -27,18 +27,24 @@ class Reminders extends React.Component {
   }
 
   onSaveProgress() {
-    this.props.startStoreReminders(
-      this.props.remindersArr,
-      this.state.reminders
-    );
+    this.props.startStoreReminders(this.state.reminders);
   }
 
   async fetchReminders() {
     const { data } = await axios.get('/api/get_reminders');
-    console.log('Client Data: ', data);
+
+    let reminders;
+    // if user hasn't saved any progress before, use the reminders from state
+    if (data.length <= 0) {
+      reminders = this.state.reminders;
+      // otherwise, use the saved data from a previous session
+    } else {
+      reminders = data;
+    }
+
     this.setState(() => {
       return {
-        reminders: data
+        reminders
       };
     });
   }
@@ -51,6 +57,7 @@ class Reminders extends React.Component {
           handleInputChange={(e) => this.handleInputChange(e, `day${i + 1}`)}
           placeholder={`Day ${i + 1}`}
           key={i}
+          value={this.state.reminders[i].text}
         />
       );
     }
@@ -59,10 +66,13 @@ class Reminders extends React.Component {
 
   handleInputChange(e, name) {
     const val = e.target.value;
-    this.setState((prevState) => {
-      return {
-        reminders: { ...prevState.reminders, ...{ [name]: val } }
-      };
+    const dayNum = name.split('day')[1];
+    const reminders = this.state.reminders;
+
+    reminders[dayNum - 1].text = val;
+
+    this.setState(() => {
+      return { reminders };
     });
 
     // check if all new updates to reminders has been saved, if not, set remindersSaved to false, otherwise do nothing

@@ -60,7 +60,7 @@ class SaveProgressButton extends React.Component {
     const buttonStyle = { height: '41px' };
 
     return (
-      <div>
+      <div className="wrapper-component-save-progress-button">
         {this.renderSaveButton(style, overlayStyle, labelStyle, buttonStyle)}
       </div>
     );

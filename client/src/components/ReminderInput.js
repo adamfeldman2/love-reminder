@@ -15,6 +15,7 @@ const ReminderInput = (props) => {
       floatingLabelText={props.placeholder}
       style={inputStyle}
       onChange={props.handleInputChange}
+      value={props.value}
     />
   );
 };
