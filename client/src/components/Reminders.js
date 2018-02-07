@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
 import { startStoreReminders, remindersSaved } from '../actions/reminders';
@@ -21,11 +22,25 @@ class Reminders extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  componentDidMount() {
+    this.fetchReminders();
+  }
+
   onSaveProgress() {
     this.props.startStoreReminders(
       this.props.remindersArr,
       this.state.reminders
     );
+  }
+
+  async fetchReminders() {
+    const { data } = await axios.get('/api/get_reminders');
+    console.log('Client Data: ', data);
+    this.setState(() => {
+      return {
+        reminders: data
+      };
+    });
   }
 
   buildInputs(firstNum, lastNum) {

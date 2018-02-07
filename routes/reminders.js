@@ -9,6 +9,15 @@ module.exports = (app, bodyParser, mongoose) => {
   );
   app.use(bodyParser.json());
 
+  // find user by id and return reminders
+  app.get('/api/get_reminders', async (req, res) => {
+    const id = req.user._id;
+    const { reminders } = await User.findOne({ _id: id });
+
+    res.send(reminders);
+  });
+
+  // find user by id and update reminders
   app.post('/api/update_reminders', (req, res) => {
     const id = req.user._id;
     const updatedRemindersArr = { reminders: req.body.reminders };

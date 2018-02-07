@@ -47,7 +47,6 @@ class SaveProgressButton extends React.Component {
   }
 
   render() {
-    console.log('Props', this.props);
     const style = { position: 'fixed', right: '5%', bottom: '5%', zIndex: '1' };
 
     const labelStyle = { padding: '16px' };
