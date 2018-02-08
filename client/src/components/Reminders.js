@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
-import { storeReminders, startStoreReminders, remindersSaved } from '../actions/reminders';
+import {
+  storeReminders,
+  startStoreReminders,
+  remindersSaved
+} from '../actions/reminders';
 
 class Reminders extends React.Component {
   constructor(props) {
@@ -28,6 +32,7 @@ class Reminders extends React.Component {
 
   onSaveProgress() {
     this.props.startStoreReminders(this.state.reminders);
+    this.props.remindersSaved('pending');
   }
 
   async fetchReminders() {
@@ -36,7 +41,7 @@ class Reminders extends React.Component {
     let reminders;
     // if user hasn't saved any progress before, use the reminders from state
     if (data.length <= 0) {
-      reminders = this.state.reminders;
+      reminders = this.state;
       // otherwise, use the saved data from a previous session
     } else {
       reminders = data;
@@ -69,7 +74,7 @@ class Reminders extends React.Component {
   handleInputChange(e, name) {
     const val = e.target.value;
     const dayNum = name.split('day')[1];
-    const reminders = this.state.reminders;
+    const { reminders } = this.state;
 
     reminders[dayNum - 1].text = val;
 

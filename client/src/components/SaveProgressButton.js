@@ -3,18 +3,24 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 
 class SaveProgressButton extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      saveUpToDate: false
-    };
-  }
-
   renderSaveButton(style, overlayStyle, labelStyle, buttonStyle) {
     switch (this.props.remindersSaved) {
       case 'no changes':
         return;
+
+      case 'pending':
+        return (
+          <RaisedButton
+            className="material-save-progress-button"
+            label="Saving..."
+            primary={true}
+            style={style}
+            overlayStyle={overlayStyle}
+            labelStyle={labelStyle}
+            buttonStyle={buttonStyle}
+            onClick={this.props.onClick}
+          />
+        );
 
       case false:
         return (

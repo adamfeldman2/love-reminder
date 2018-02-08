@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import { startSetDates } from '../actions/reminders';
 
 class DatePickerComponent extends React.Component {
-  handleDateChange(undefined, date) {
-    const momentifyDate = moment(date).format('MMM D, YYYY');
-
+  handleDateChange(x, date) {
+    const momentifyDate = moment(date).format('YYYY-MM-DD');
     this.props.dispatch(startSetDates(momentifyDate, this.props.remindersArr));
   }
 
@@ -23,7 +22,7 @@ class DatePickerComponent extends React.Component {
           autoOk={true}
           minDate={tomorrow}
           formatDate={(date) => moment(date).format('MMM D, YYYY')}
-          onChange={(undefined, date) => this.handleDateChange(undefined, date)}
+          onChange={(x, date) => this.handleDateChange(x, date)}
         />
       </div>
     );
