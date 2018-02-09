@@ -47,6 +47,8 @@ class SaveProgressButton extends React.Component {
             overlayStyle={overlayStyle}
             labelStyle={labelStyle}
             buttonStyle={buttonStyle}
+            disabledBackgroundColor={'#419D60'}
+            disabledLabelColor={'#fff'}
           />
         );
     }

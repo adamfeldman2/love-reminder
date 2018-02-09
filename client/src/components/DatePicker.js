@@ -10,21 +10,24 @@ class DatePickerComponent extends React.Component {
     this.props.dispatch(startSetDates(momentifyDate, this.props.remindersArr));
   }
 
+  updateValue(date) {
+    return date ? moment(new Date(date)).toDate() : null;
+  }
+
   render() {
     const tomorrow = moment()
       .add(1, 'days')
       .toDate();
 
     return (
-      <div className="wrapper-component-date-picker wrapper">
-        <DatePicker
-          hintText="Date"
-          autoOk={true}
-          minDate={tomorrow}
-          formatDate={(date) => moment(date).format('MMM D, YYYY')}
-          onChange={(x, date) => this.handleDateChange(x, date)}
-        />
-      </div>
+      <DatePicker
+        hintText="Date"
+        autoOk={true}
+        minDate={tomorrow}
+        formatDate={(date) => moment(date).format('MMM D, YYYY')}
+        onChange={(x, date) => this.handleDateChange(x, date)}
+        value={this.updateValue(this.props.remindersArr[0].sendDate)}
+      />
     );
   }
 }
