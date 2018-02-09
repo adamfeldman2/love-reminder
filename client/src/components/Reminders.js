@@ -38,20 +38,20 @@ class Reminders extends React.Component {
   async fetchReminders() {
     const { data } = await axios.get('/api/get_reminders');
 
-    let reminders;
+    let remindersArr;
     // if user hasn't saved any progress before, use the reminders from state
     if (data.length <= 0) {
-      reminders = this.state;
+      remindersArr = this.state.reminders;
       // otherwise, use the saved data from a previous session
     } else {
-      reminders = data;
+      remindersArr = data;
     }
 
-    this.props.storeReminders(reminders);
+    this.props.storeReminders(remindersArr);
 
     this.setState(() => {
       return {
-        reminders
+        reminders: remindersArr
       };
     });
   }
