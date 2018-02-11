@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
+const moment = require('moment');
 const passport = require('passport');
 const keys = require('./config/keys');
 const schedule = require('node-schedule');
@@ -34,7 +35,7 @@ require('./routes/auth')(app, bodyParser, passport, mongoose);
 require('./routes/reminders')(app, bodyParser, mongoose);
 require('./routes/mailgun')(app, bodyParser, mailgun);
 
-require('./jobs/email')(schedule, mailgun);
+require('./jobs/email')(schedule, mailgun, mongoose, moment);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
