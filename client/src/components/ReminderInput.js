@@ -3,7 +3,6 @@ import TextField from 'material-ui/TextField';
 
 const ReminderInput = (props) => {
   const inputStyle = {
-    width: '85%',
     margin: '7px auto 0',
     display: 'block',
     fontSize: '1.1em'
@@ -15,6 +14,7 @@ const ReminderInput = (props) => {
       floatingLabelText={props.placeholder}
       style={inputStyle}
       onChange={props.handleInputChange}
+      fullWidth={true}
       value={props.value}
     />
   );

@@ -21,6 +21,7 @@ class DatePickerComponent extends React.Component {
 
     return (
       <DatePicker
+        className="wrapper-component-date-picker wrapper"
         hintText="Date"
         autoOk={true}
         disableYearSelection={true}
