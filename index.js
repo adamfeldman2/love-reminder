@@ -6,6 +6,11 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
 
+const mailgun = require('mailgun-js')({
+  apiKey: keys.mailgunApiKey,
+  domain: keys.mailgunDomain
+});
+
 require('./models/user');
 require('./services/passport')(passport, keys, mongoose);
 
@@ -27,6 +32,7 @@ app.use(passport.session());
 
 require('./routes/auth')(app, bodyParser, passport, mongoose);
 require('./routes/reminders')(app, bodyParser, mongoose);
+require('./routes/mailgun')(app, bodyParser, mailgun);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

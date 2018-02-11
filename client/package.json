@@ -40,6 +40,9 @@
     },
     "/api/*": {
       "target": "http://localhost:5000"
+    },
+    "/send-email": {
+      "target": "http://localhost:5000"
     }
   }
 }
