@@ -2,6 +2,8 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import validateEmail from '../utils/validateEmail';
+import { connect } from 'react-redux';
+import { startSetRecipient, recipientSaved } from '../actions/reminders';
 
 class Recipient extends React.Component {
   constructor(props) {
@@ -30,6 +32,10 @@ class Recipient extends React.Component {
         [name]: value
       };
     });
+
+    if (this.props.isRecipientSaved) {
+      this.props.dispatch(recipientSaved(false));
+    }
   }
 
   handleSubmit() {
@@ -50,10 +56,34 @@ class Recipient extends React.Component {
       this.setState(() => {
         return { error: false };
       });
+      this.props.dispatch(startSetRecipient(this.state.email1));
+      this.props.dispatch(recipientSaved('pending'));
     } else {
       this.setState(() => {
         return { error: true };
       });
+    }
+  }
+
+  submitButtonText() {
+    switch (this.props.isRecipientSaved) {
+      case 'no changes':
+        return;
+
+      case 'pending':
+        return <RaisedButton label="Saving..." primary={true} />;
+
+      case false:
+        return <RaisedButton label="Submit" primary={true} onClick={this.handleSubmit} />;
+
+      default:
+        return (
+          <RaisedButton
+            label="Saved!"
+            primary={true}
+            disabled
+          />
+        );
     }
   }
 
@@ -73,14 +103,14 @@ class Recipient extends React.Component {
           errorText={!this.state.email2Valid && 'Must be a valid email address'}
           onChange={this.handleEmailChange}
         />
-        <RaisedButton
-          label="Submit"
-          primary={true}
-          onClick={this.handleSubmit}
-        />
+        {this.submitButtonText()}
       </div>
     );
   }
 }
 
-export default Recipient;
+const mapStateToProps = (state) => {
+  return { isRecipientSaved: state.reminders.recipientSaved };
+};
+
+export default connect(mapStateToProps)(Recipient);

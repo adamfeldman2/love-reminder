@@ -33,7 +33,8 @@ module.exports = (passport, keys, mongoose) => {
           googleId: profile.id,
           givenName: profile.name.givenName,
           email: profile.emails[0].value,
-          reminders: []
+          reminders: [],
+          recipient: ''
         }).save();
         done(null, newUser);
       }

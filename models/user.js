@@ -5,7 +5,8 @@ const userSchema = new Schema({
   googleId: String,
   givenName: String,
   email: String,
-  reminders: Array
+  reminders: Array,
+  recipient: String
 });
 
 mongoose.model('users', userSchema);

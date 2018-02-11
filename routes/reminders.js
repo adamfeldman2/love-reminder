@@ -32,4 +32,19 @@ module.exports = (app, bodyParser, mongoose) => {
         res.send({ success: false });
       });
   });
+
+  app.post('/api/set_recipient', (req, res) => {
+    const id = req.user._id;
+    const { recipient } = req.body;
+
+    User.findByIdAndUpdate(id, { recipient })
+      .then(() => {
+        console.log("The recipient's email address was saved!");
+        res.send({ success: true });
+      })
+      .catch((err) => {
+        console.log("The recipient's email address could not be saved", err);
+        res.send({ success: false });
+      });
+  });
 };

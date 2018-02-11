@@ -25,7 +25,7 @@ class DatePickerComponent extends React.Component {
         hintText="Date"
         autoOk={true}
         disableYearSelection={true}
-        minDate={tomorrow}
+        // minDate={tomorrow}
         formatDate={(date) => moment(date).format('MMM D, YYYY')}
         onChange={(x, date) => this.handleDateChange(x, date)}
         value={this.updateValue(this.props.remindersArr[0].sendDate)}

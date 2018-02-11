@@ -7,7 +7,9 @@ const defaultState = () => {
 
   return {
     remindersArr: arr,
-    remindersSaved: 'no changes'
+    remindersSaved: 'no changes',
+    recipient: null,
+    recipientSaved: 'no changes'
   };
 };
 
@@ -18,6 +20,12 @@ const remindersReducer = (state = defaultState(), action) => {
 
     case 'REMINDERS_SAVED':
       return { ...state, remindersSaved: action.saved };
+
+    case 'SET_RECIPIENT':
+      return { ...state, recipient: action.recipient };
+
+    case 'RECIPIENT_SAVED':
+      return { ...state, recipientSaved: action.saved };
 
     default:
       return state;

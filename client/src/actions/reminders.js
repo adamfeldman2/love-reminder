@@ -45,4 +45,41 @@ const startSetDates = (startDate, currentRemindersArr) => {
   };
 };
 
-export { storeReminders, startStoreReminders, remindersSaved, startSetDates };
+const recipientSaved = (saved) => {
+  return {
+    type: 'RECIPIENT_SAVED',
+    saved
+  };
+};
+
+const setRecipient = (recipient) => {
+  return {
+    type: 'SET_RECIPIENT',
+    recipient
+  };
+};
+
+const startSetRecipient = (recipient) => {
+  return (dispatch) => {
+    axios
+      .post('/api/set_recipient', { recipient })
+      .then((res) => {
+        if (res.data.success) {
+          dispatch(setRecipient(recipient));
+          dispatch(recipientSaved(true));
+        }
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+  };
+};
+
+export {
+  startSetRecipient,
+  recipientSaved,
+  storeReminders,
+  startStoreReminders,
+  remindersSaved,
+  startSetDates
+};
