@@ -15,9 +15,9 @@ class DatePickerComponent extends React.Component {
   }
 
   render() {
-    const tomorrow = moment()
-      .add(1, 'days')
-      .toDate();
+    // const tomorrow = moment()
+    //   .add(1, 'days')
+    //   .toDate();
 
     return (
       <DatePicker
