@@ -1,8 +1,9 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import validateEmail from '../utils/validateEmail';
+import axios from 'axios';
 import { connect } from 'react-redux';
+import validateEmail from '../utils/validateEmail';
 import { startSetRecipient, recipientSaved } from '../actions/reminders';
 
 class Recipient extends React.Component {
@@ -10,8 +11,8 @@ class Recipient extends React.Component {
     super(props);
 
     this.state = {
-      email1: null,
-      email2: null,
+      email1: '',
+      email2: '',
       email1Valid: true,
       email2Valid: true,
       emailMatch: true,
@@ -21,6 +22,21 @@ class Recipient extends React.Component {
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchRecipient();
+  }
+
+  // fetch recipient and set to state
+  async fetchRecipient() {
+    const { data: recipient } = await axios.get('/api/get_recipient');
+
+    this.setState(() => {
+      return {
+        email1: recipient
+      };
+    });
   }
 
   handleEmailChange(e) {
@@ -74,16 +90,16 @@ class Recipient extends React.Component {
         return <RaisedButton label="Saving..." primary={true} />;
 
       case false:
-        return <RaisedButton label="Submit" primary={true} onClick={this.handleSubmit} />;
-
-      default:
         return (
           <RaisedButton
-            label="Saved!"
+            label="Submit"
             primary={true}
-            disabled
+            onClick={this.handleSubmit}
           />
         );
+
+      default:
+        return <RaisedButton label="Saved!" primary={true} disabled />;
     }
   }
 
@@ -96,13 +112,22 @@ class Recipient extends React.Component {
           name="email1"
           errorText={!this.state.email1Valid && 'Must be a valid email address'}
           onChange={this.handleEmailChange}
+          value={this.state.email1}
         />
-        <TextField
-          hintText="Confirm email address"
-          name="email2"
-          errorText={!this.state.email2Valid && 'Must be a valid email address'}
-          onChange={this.handleEmailChange}
-        />
+
+        {(this.props.isRecipientSaved !== 'no changes' ||
+          !this.props.isRecipientSaved) && (
+          <TextField
+            hintText="Confirm email address"
+            name="email2"
+            errorText={
+              !this.state.email2Valid && 'Must be a valid email address'
+            }
+            onChange={this.handleEmailChange}
+            value={this.state.email2}
+          />
+        )}
+
         {this.submitButtonText()}
       </div>
     );

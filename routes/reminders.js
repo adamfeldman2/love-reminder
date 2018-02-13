@@ -12,9 +12,21 @@ module.exports = (app, bodyParser, mongoose) => {
   // find user by id and return reminders
   app.get('/api/get_reminders', async (req, res) => {
     const id = req.user._id;
-    const { reminders } = await User.findOne({ _id: id });
+    const { reminders } = await User.findOne({
+      _id: id
+    });
 
     res.send(reminders);
+  });
+
+  // find user by id and return recipient
+  app.get('/api/get_recipient', async (req, res) => {
+    const id = req.user._id;
+    const { recipient } = await User.findOne({
+      _id: id
+    });
+
+    res.send(recipient);
   });
 
   // find user by id and update reminders
