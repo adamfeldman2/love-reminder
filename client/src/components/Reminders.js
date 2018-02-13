@@ -98,7 +98,12 @@ class Reminders extends React.Component {
     };
 
     return (
-      <div className="component-reminders">
+      <div className="wrapper-component-reminders">
+        <div className="wrapper-content wrapper">
+          <h2>3</h2>
+          <p>Now tell them why you love them...</p>
+        </div>
+
         <Tabs style={tabsStyle}>
           {/* 1-72 */}
           <Tab

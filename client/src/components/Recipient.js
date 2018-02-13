@@ -106,6 +106,9 @@ class Recipient extends React.Component {
   render() {
     return (
       <div className="wrapper-component-recipient wrapper">
+        <h2>1</h2>
+        <p>Who are the emails being sent to?</p>
+
         {!this.state.emailMatch && <div>Email addresses do not match</div>}
         <TextField
           hintText="Recipient's email address"
