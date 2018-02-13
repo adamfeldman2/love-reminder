@@ -9,13 +9,16 @@ import Router from './routers/router';
 const customTheme = getMuiTheme({
   fontFamily: 'Montserrat, sans-serif',
   palette: {
-    accent1Color: '#FF4081',
-    primary1Color: '#03A9F4',
-    primary2Color: '#0288D1',
-    primary3Color: '#B3E5FC',
-    pickerHeaderColor: '#03A9F4'
+    accent1Color: '#fff',
+    primary1Color: '#F44336',
+    primary2Color: '#D32F2F',
+    primary3Color: '#FFCDD2',
+    pickerHeaderColor: '#F44336',
+    textColor: '#1f1f1f'
   }
 });
+
+console.log(customTheme);
 
 class App extends React.Component {
   componentDidMount() {

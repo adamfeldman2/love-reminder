@@ -10,7 +10,6 @@ const Dashboard = () => {
       <Recipient />
       <Divider />
       <DatePicker />
-      <Divider />
       <Reminders />
     </div>
   );

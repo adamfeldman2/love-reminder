@@ -90,13 +90,7 @@ class Recipient extends React.Component {
         return <RaisedButton label="Saving..." primary={true} />;
 
       case false:
-        return (
-          <RaisedButton
-            label="Submit"
-            primary={true}
-            onClick={this.handleSubmit}
-          />
-        );
+        return <RaisedButton label="Submit" primary={true} onClick={this.handleSubmit} />;
 
       default:
         return <RaisedButton label="Saved!" primary={true} disabled />;
@@ -104,36 +98,20 @@ class Recipient extends React.Component {
   }
 
   render() {
-    return (
-      <div className="wrapper-component-recipient wrapper">
-        <h2>1</h2>
-        <p>Who are the emails being sent to?</p>
+    const inputStyle = {
+      textAlign: 'center'
+    }
+
+    return <div className="wrapper-component-recipient wrapper">
+        <h3>Who are the emails being sent to?</h3>
 
         {!this.state.emailMatch && <div>Email addresses do not match</div>}
-        <TextField
-          hintText="Recipient's email address"
-          name="email1"
-          errorText={!this.state.email1Valid && 'Must be a valid email address'}
-          onChange={this.handleEmailChange}
-          value={this.state.email1}
-        />
+        <TextField hintText="Recipient's email address" name="email1" errorText={!this.state.email1Valid && 'Must be a valid email address'} onChange={this.handleEmailChange} value={this.state.email1} inputStyle={inputStyle} />
 
-        {(this.props.isRecipientSaved !== 'no changes' ||
-          !this.props.isRecipientSaved) && (
-          <TextField
-            hintText="Confirm email address"
-            name="email2"
-            errorText={
-              !this.state.email2Valid && 'Must be a valid email address'
-            }
-            onChange={this.handleEmailChange}
-            value={this.state.email2}
-          />
-        )}
+        {(this.props.isRecipientSaved !== 'no changes' || !this.props.isRecipientSaved) && <TextField hintText="Confirm email address" name="email2" errorText={!this.state.email2Valid && 'Must be a valid email address'} onChange={this.handleEmailChange} value={this.state.email2} />}
 
         {this.submitButtonText()}
-      </div>
-    );
+      </div>;
   }
 }
 

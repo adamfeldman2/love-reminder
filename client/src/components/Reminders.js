@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
-import {
-  storeReminders,
-  startStoreReminders,
-  remindersSaved
-} from '../actions/reminders';
+import { storeReminders, startStoreReminders, remindersSaved } from '../actions/reminders';
 
 class Reminders extends React.Component {
   constructor(props) {
@@ -99,11 +95,6 @@ class Reminders extends React.Component {
 
     return (
       <div className="wrapper-component-reminders">
-        <div className="wrapper-content wrapper">
-          <h2>3</h2>
-          <p>Now tell them why you love them...</p>
-        </div>
-
         <Tabs style={tabsStyle}>
           {/* 1-72 */}
           <Tab
@@ -115,9 +106,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="1-72"
           >
-            <div className="wrapper">
-              {this.state.tab1Active && this.buildInputs(1, 72)}
-            </div>
+            <div className="wrapper">{this.state.tab1Active && this.buildInputs(1, 72)}</div>
           </Tab>
 
           {/* 73-145 */}
@@ -130,9 +119,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="73-145"
           >
-            <div className="wrapper">
-              {this.state.tab2Active && this.buildInputs(73, 145)}
-            </div>
+            <div className="wrapper">{this.state.tab2Active && this.buildInputs(73, 145)}</div>
           </Tab>
 
           {/* 146-218 */}
@@ -145,9 +132,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="146-218"
           >
-            <div className="wrapper">
-              {this.state.tab3Active && this.buildInputs(146, 218)}
-            </div>
+            <div className="wrapper">{this.state.tab3Active && this.buildInputs(146, 218)}</div>
           </Tab>
 
           {/* 219-291 */}
@@ -160,9 +145,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="219-291"
           >
-            <div className="wrapper">
-              {this.state.tab4Active && this.buildInputs(219, 291)}
-            </div>
+            <div className="wrapper">{this.state.tab4Active && this.buildInputs(219, 291)}</div>
           </Tab>
 
           {/* 292-365 */}
@@ -175,9 +158,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="292-365"
           >
-            <div className="wrapper">
-              {this.state.tab5Active && this.buildInputs(292, 365)}
-            </div>
+            <div className="wrapper">{this.state.tab5Active && this.buildInputs(292, 365)}</div>
           </Tab>
         </Tabs>
 

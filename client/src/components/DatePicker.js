@@ -23,8 +23,7 @@ class DatePickerComponent extends React.Component {
 
     return (
       <div className="wrapper-component-date-picker wrapper">
-        <h2>2</h2>
-        <p>
+        <h3>
           When should the first email be sent?{' '}
           <IconButton
             tooltip={
@@ -39,7 +38,7 @@ class DatePickerComponent extends React.Component {
               <i className="fas fa-question-circle" />
             </FontIcon>
           </IconButton>
-        </p>
+        </h3>
 
         <DatePicker
           hintText="Date"
