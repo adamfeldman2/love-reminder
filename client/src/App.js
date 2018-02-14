@@ -18,8 +18,6 @@ const customTheme = getMuiTheme({
   }
 });
 
-console.log(customTheme);
-
 class App extends React.Component {
   componentDidMount() {
     this.props.startFetchUser();
