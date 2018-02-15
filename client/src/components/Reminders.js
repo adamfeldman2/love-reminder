@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
-import { storeReminders, startStoreReminders, remindersSaved } from '../actions/reminders';
+import {
+  storeReminders,
+  startStoreReminders,
+  remindersSaved
+} from '../actions/reminders';
 
 class Reminders extends React.Component {
   constructor(props) {
@@ -27,8 +31,8 @@ class Reminders extends React.Component {
   }
 
   onSaveProgress() {
-    this.props.startStoreReminders(this.state.reminders);
-    this.props.remindersSaved('pending');
+    this.props.dispatch(startStoreReminders(this.state.reminders));
+    this.props.dispatch(remindersSaved('pending'));
   }
 
   async fetchReminders() {
@@ -43,7 +47,7 @@ class Reminders extends React.Component {
       remindersArr = data;
     }
 
-    this.props.storeReminders(remindersArr);
+    this.props.dispatch(storeReminders(remindersArr));
 
     this.setState(() => {
       return {
@@ -58,7 +62,11 @@ class Reminders extends React.Component {
       inputs.push(
         <ReminderInput
           handleInputChange={(e) => this.handleInputChange(e, `day${i + 1}`)}
-          placeholder={`Day ${i + 1}`}
+          placeholder={
+            this.state.reminders[0].sendDate
+              ? this.state.reminders[i].sendDate
+              : `Day ${i + 1}`
+          }
           key={i}
           value={this.state.reminders[i].text}
         />
@@ -80,7 +88,7 @@ class Reminders extends React.Component {
 
     // check if all new updates to reminders has been saved, if not, set remindersSaved to false, otherwise do nothing
     if (this.props.isRemindersSaved) {
-      this.props.remindersSaved(false);
+      this.props.dispatch(remindersSaved(false));
     }
   }
 
@@ -106,7 +114,9 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="1-72"
           >
-            <div className="wrapper">{this.state.tab1Active && this.buildInputs(1, 72)}</div>
+            <div className="wrapper">
+              {this.state.tab1Active && this.buildInputs(1, 72)}
+            </div>
           </Tab>
 
           {/* 73-145 */}
@@ -119,7 +129,9 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="73-145"
           >
-            <div className="wrapper">{this.state.tab2Active && this.buildInputs(73, 145)}</div>
+            <div className="wrapper">
+              {this.state.tab2Active && this.buildInputs(73, 145)}
+            </div>
           </Tab>
 
           {/* 146-218 */}
@@ -132,7 +144,9 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="146-218"
           >
-            <div className="wrapper">{this.state.tab3Active && this.buildInputs(146, 218)}</div>
+            <div className="wrapper">
+              {this.state.tab3Active && this.buildInputs(146, 218)}
+            </div>
           </Tab>
 
           {/* 219-291 */}
@@ -145,7 +159,9 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="219-291"
           >
-            <div className="wrapper">{this.state.tab4Active && this.buildInputs(219, 291)}</div>
+            <div className="wrapper">
+              {this.state.tab4Active && this.buildInputs(219, 291)}
+            </div>
           </Tab>
 
           {/* 292-365 */}
@@ -158,7 +174,9 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="292-365"
           >
-            <div className="wrapper">{this.state.tab5Active && this.buildInputs(292, 365)}</div>
+            <div className="wrapper">
+              {this.state.tab5Active && this.buildInputs(292, 365)}
+            </div>
           </Tab>
         </Tabs>
 
@@ -175,19 +193,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    storeReminders: (reminders) => {
-      dispatch(storeReminders(reminders));
-    },
-
-    startStoreReminders: (currentRemindersState, updatedReminders) => {
-      dispatch(startStoreReminders(currentRemindersState, updatedReminders));
-    },
-    remindersSaved: (saved) => {
-      dispatch(remindersSaved(saved));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Reminders);
+export default connect(mapStateToProps)(Reminders);

@@ -19,7 +19,7 @@ class DatePickerComponent extends React.Component {
   disablePicker(selectedDate) {
     const now = moment();
     const date = this.javascriptSafeDate(selectedDate);
-    return now.diff(date) > 0 ? true : false;
+    return now.diff(date) > 0 || false;
   }
 
   render() {
@@ -52,7 +52,9 @@ class DatePickerComponent extends React.Component {
           hintText="Date"
           autoOk={true}
           disableYearSelection={true}
-          disabled={this.disablePicker(this.javascriptSafeDate(this.props.remindersArr[0].sendDate))}
+          disabled={this.disablePicker(
+            this.javascriptSafeDate(this.props.remindersArr[0].sendDate)
+          )}
           minDate={tomorrow}
           formatDate={(date) => moment(date).format('MMM D, YYYY')}
           onChange={(x, date) => this.handleDateChange(x, date)}
