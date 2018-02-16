@@ -61,7 +61,7 @@ class Header extends React.Component {
         <AppBar
           title={
             <Link className="title" to={this.props.auth ? '/dashboard' : '/'}>
-              Web App
+              365 Reasons Why
             </Link>
           }
           onLeftIconButtonClick={this.toggleMenu}
