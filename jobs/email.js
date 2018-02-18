@@ -1,5 +1,6 @@
 module.exports = (schedule, mailgun, mongoose, moment) => {
   const User = mongoose.model('users');
+  const decrypt = require('../utils/crypt').decrypt;
 
   // set job's schedule
   const job = schedule.scheduleJob('0 17 * * *', function() {
@@ -17,10 +18,10 @@ module.exports = (schedule, mailgun, mongoose, moment) => {
             user[i].reminders[j].sendDate === today &&
             user[i].reminders[j].text
           ) {
-            // build email's html
+            // build email's html, decrypt the message
             const output = `
               <h4>New 365 Reasons Why message from ${user[i].givenName}!</h4>
-              <p>${user[i].reminders[j].text}</p>
+              <p>${decrypt(user[i].reminders[j].text)}</p>
             `;
 
             // build email info
@@ -28,9 +29,9 @@ module.exports = (schedule, mailgun, mongoose, moment) => {
               from: `${user[i].givenName} <${user[i].email}>`,
               to: user[i].recipient,
               subject: 'New Message From 365 Reasons Why!',
-              text: `New 365 Reasons Why message from ${user[i].givenName}: ${
-                user[i].reminders[j].text
-              }`,
+              text: `New 365 Reasons Why message from ${
+                user[i].givenName
+              }: ${decrypt(user[i].reminders[j].text)}`,
               html: output
             };
             //send message via mailgun

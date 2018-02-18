@@ -25,7 +25,8 @@
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
@@ -38,9 +39,6 @@
       "target": "http://localhost:5000"
     },
     "/api/*": {
-      "target": "http://localhost:5000"
-    },
-    "/send-email": {
       "target": "http://localhost:5000"
     }
   }

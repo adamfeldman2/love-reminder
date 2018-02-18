@@ -33,7 +33,6 @@ app.use(passport.session());
 
 require('./routes/auth')(app, bodyParser, passport, mongoose);
 require('./routes/reminders')(app, bodyParser, mongoose);
-require('./routes/mailgun')(app, bodyParser, mailgun);
 
 require('./jobs/email')(schedule, mailgun, mongoose, moment);
 
