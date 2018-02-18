@@ -15,6 +15,14 @@ module.exports = (app, bodyParser, mongoose) => {
     const { reminders } = await User.findOne({
       _id: id
     });
+    const decrypt = require('../utils/crypt').decrypt;
+
+    // decrypt messages before sending to client
+    for (let i = 0; i < reminders.length; i++) {
+      if (reminders[i].text) {
+        reminders[i].text = decrypt(reminders[i].text);
+      }
+    }
 
     res.send(reminders);
   });
@@ -33,15 +41,29 @@ module.exports = (app, bodyParser, mongoose) => {
   app.post('/api/update_reminders', (req, res) => {
     const id = req.user._id;
     const updatedRemindersArr = { reminders: req.body.reminders };
+    const encrypt = require('../utils/crypt').encrypt;
+
+    // encrypt all text in updatedRemindersArr before saving to database
+    for (let i = 0; i < updatedRemindersArr.reminders.length; i++) {
+      if (updatedRemindersArr.reminders[i].text) {
+        updatedRemindersArr.reminders[i].text = encrypt(
+          updatedRemindersArr.reminders[i].text
+        );
+      }
+    }
 
     User.findByIdAndUpdate(id, updatedRemindersArr)
       .then(() => {
         console.log('Reminders were updated and saved! ');
-        res.send({ success: true });
+        res.send({
+          success: true
+        });
       })
       .catch((err) => {
         console.log('Reminders were not updated and saved: ', err);
-        res.send({ success: false });
+        res.send({
+          success: false
+        });
       });
   });
 

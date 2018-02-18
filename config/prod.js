@@ -4,5 +4,6 @@ module.exports = {
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
   cookieKey: process.env.COOKIE_KEY,
   mailgunApiKey: process.env.MAILGUN_API_KEY,
-  mailgunDomain: process.env.MAILGUN_DOMAIN
+  mailgunDomain: process.env.MAILGUN_DOMAIN,
+  encryptionKey: process.env.ENCRYPTION_KEY
 };
