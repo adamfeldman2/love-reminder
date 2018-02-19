@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Menu from './Menu';
+import Payment from './Payment';
 
 class Header extends React.Component {
   constructor(props) {
@@ -40,14 +41,19 @@ class Header extends React.Component {
         );
 
       default:
-        return (
-          <FlatButton
-            label="Logout"
-            labelStyle={labelStyle}
-            primary={true}
-            href="/api/logout"
-          />
-        );
+        return [
+          <li key="1">
+            <Payment />
+          </li>,
+          <li key="2">
+            <FlatButton
+              label="Logout"
+              labelStyle={labelStyle}
+              primary={true}
+              href="/api/logout"
+            />
+          </li>
+        ];
     }
   }
 
@@ -67,7 +73,7 @@ class Header extends React.Component {
           onLeftIconButtonClick={this.toggleMenu}
         >
           <ul className="wrapper-right-side-buttons">
-            <li>{this.renderContent(labelStyle)}</li>
+            {this.renderContent(labelStyle)}
           </ul>
         </AppBar>
 
