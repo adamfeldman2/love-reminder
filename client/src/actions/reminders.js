@@ -52,20 +52,12 @@ const recipientSaved = (saved) => {
   };
 };
 
-const setRecipient = (recipient) => {
-  return {
-    type: 'SET_RECIPIENT',
-    recipient
-  };
-};
-
 const startSetRecipient = (recipient) => {
   return (dispatch) => {
     axios
       .post('/api/set_recipient', { recipient })
       .then((res) => {
         if (res.data.success) {
-          dispatch(setRecipient(recipient));
           dispatch(recipientSaved(true));
         }
       })

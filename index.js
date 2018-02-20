@@ -16,10 +16,13 @@ require('./models/user');
 require('./services/passport')(passport, keys, mongoose);
 
 mongoose.connect(keys.mongoURI);
-console.log('Database Connection ⚡️⚡️', mongoose.connection.readyState);
+console.log('Database Connection ⚡️⚡️ : ', mongoose.connection.readyState);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// bodyParser middleware
+app.use(bodyParser.json());
 
 app.use(
   cookieSession({
@@ -31,8 +34,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/auth')(app, bodyParser, passport, mongoose);
+require('./routes/auth')(app, passport, mongoose);
 require('./routes/reminders')(app, bodyParser, mongoose);
+require('./routes/payment')(app, bodyParser, mongoose);
 
 require('./jobs/email')(schedule, mailgun, mongoose, moment);
 

@@ -14,4 +14,4 @@ const startFetchUser = () => {
   };
 };
 
-export { startFetchUser };
+export { startFetchUser, fetchUser };

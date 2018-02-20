@@ -1,13 +1,5 @@
-module.exports = (app, bodyParser, passport, mongoose) => {
+module.exports = (app, passport, mongoose) => {
   const User = mongoose.model('users');
-
-  // Body Parser Middleware
-  app.use(
-    bodyParser.urlencoded({
-      extended: false
-    })
-  );
-  app.use(bodyParser.json());
 
   app.get(
     '/auth/google',

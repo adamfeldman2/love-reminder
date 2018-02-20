@@ -1,14 +1,6 @@
 module.exports = (app, bodyParser, mongoose) => {
   const User = mongoose.model('users');
 
-  // Body Parser Middleware
-  app.use(
-    bodyParser.urlencoded({
-      extended: false
-    })
-  );
-  app.use(bodyParser.json());
-
   // find user by id and return reminders
   app.get('/api/get_reminders', async (req, res) => {
     const id = req.user._id;
