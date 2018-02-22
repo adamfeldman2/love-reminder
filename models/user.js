@@ -6,7 +6,8 @@ const userSchema = new Schema({
   givenName: String,
   email: String,
   reminders: Array,
-  recipient: String
+  recipient: String,
+  hasPaid: Boolean
 });
 
 mongoose.model('users', userSchema);

@@ -34,7 +34,8 @@ module.exports = (passport, keys, mongoose) => {
           givenName: profile.name.givenName,
           email: profile.emails[0].value,
           reminders: [],
-          recipient: ''
+          recipient: '',
+          hasPaid: false
         }).save();
         done(null, newUser);
       }
