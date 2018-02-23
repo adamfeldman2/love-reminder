@@ -1,10 +1,11 @@
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.stripeSecretKey);
+const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = (app, bodyParser, mongoose) => {
   const User = mongoose.model('users');
 
-  app.post('/api/stripe', (req, res) => {
+  app.post('/api/stripe', requireLogin, (req, res) => {
     // send stripe charge to stripe — returns a promise
     stripe.charges
       .create({
