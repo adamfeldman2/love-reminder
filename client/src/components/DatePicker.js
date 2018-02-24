@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import { connect } from 'react-redux';
 import { startSetDates } from '../actions/reminders';
+import momentSafeJSDate from '../utils/momentSafeJSDate';
 
 class DatePickerComponent extends React.Component {
   handleDateChange(x, date) {
@@ -12,13 +13,9 @@ class DatePickerComponent extends React.Component {
     this.props.dispatch(startSetDates(momentifyDate, this.props.remindersArr));
   }
 
-  javascriptSafeDate(date) {
-    return date ? moment(new Date(date)).toDate() : null;
-  }
-
   disablePicker(selectedDate) {
     const now = moment();
-    const date = this.javascriptSafeDate(selectedDate);
+    const date = momentSafeJSDate(selectedDate);
     return now.diff(date) > 0 || false;
   }
 
@@ -53,12 +50,12 @@ class DatePickerComponent extends React.Component {
           autoOk={true}
           disableYearSelection={true}
           disabled={this.disablePicker(
-            this.javascriptSafeDate(this.props.remindersArr[0].sendDate)
+            momentSafeJSDate(this.props.remindersArr[0].sendDate)
           )}
           minDate={tomorrow}
           formatDate={(date) => moment(date).format('MMM D, YYYY')}
           onChange={(x, date) => this.handleDateChange(x, date)}
-          value={this.javascriptSafeDate(this.props.remindersArr[0].sendDate)}
+          value={momentSafeJSDate(this.props.remindersArr[0].sendDate)}
         />
       </div>
     );

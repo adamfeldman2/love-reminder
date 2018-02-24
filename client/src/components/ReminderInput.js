@@ -9,14 +9,15 @@ const ReminderInput = (props) => {
   };
 
   return (
-    <TextField
-      hintText="What do you love about them? Keep it short and sweet!"
-      floatingLabelText={props.placeholder}
-      style={inputStyle}
-      onChange={props.handleInputChange}
-      fullWidth={true}
-      value={props.value}
-    />
+    <TextField 
+      hintText="What do you love about them? Keep it short and sweet!" 
+      floatingLabelText={props.placeholder} 
+      style={inputStyle} 
+      onChange={props.handleInputChange} 
+      fullWidth={true} 
+      value={props.value} 
+      disabled={props.disabled} 
+      className={`wrapper-reminder-input ${props.disabled && props.value && 'sent'} ${!props.value && props.disabled && 'no-value'}`} />
   );
 };
 

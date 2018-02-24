@@ -1,0 +1,27 @@
+.wrapper-reminder-input {
+  position: relative;
+
+  &.sent {
+    &::before {
+      content: 'Sent!';
+      position: absolute;
+      bottom: 9px;
+      left: -42px;
+      color: $green-dark;
+      font-size: 0.6em;
+      letter-spacing: $letter-spacing-light;
+    }
+  }
+
+  &.no-value {
+    &::before {
+      content: 'No value';
+      position: absolute;
+      bottom: 9px;
+      left: -60px;
+      color: $red;
+      font-size: 0.6em;
+      letter-spacing: $letter-spacing-light;
+    }
+  }
+}

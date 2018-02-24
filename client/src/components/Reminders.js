@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import moment from 'moment';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
 import {
@@ -9,6 +10,7 @@ import {
   startStoreReminders,
   remindersSaved
 } from '../actions/reminders';
+import momentSafeJSDate from '../utils/momentSafeJSDate';
 
 class Reminders extends React.Component {
   constructor(props) {
@@ -69,6 +71,10 @@ class Reminders extends React.Component {
           }
           key={i}
           value={this.state.reminders[i].text}
+          disabled={
+            moment().diff(momentSafeJSDate(this.state.reminders[i].sendDate)) >
+            0
+          }
         />
       );
     }

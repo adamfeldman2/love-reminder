@@ -228,6 +228,25 @@ body {
   justify-content: center;
   align-items: center; }
 
+.wrapper-reminder-input {
+  position: relative; }
+  .wrapper-reminder-input.sent::before {
+    content: 'Sent!';
+    position: absolute;
+    bottom: 9px;
+    left: -42px;
+    color: #419d60;
+    font-size: 0.6em;
+    letter-spacing: 0.5px; }
+  .wrapper-reminder-input.no-value::before {
+    content: 'No value';
+    position: absolute;
+    bottom: 9px;
+    left: -60px;
+    color: #f44336;
+    font-size: 0.6em;
+    letter-spacing: 0.5px; }
+
 .wrapper-component-reminders {
   padding-top: 40px;
   padding-bottom: 40px; }
