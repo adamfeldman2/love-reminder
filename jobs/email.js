@@ -3,7 +3,7 @@ module.exports = (schedule, mailgun, mongoose, moment) => {
   const decrypt = require('../utils/crypt').decrypt;
 
   // set job's schedule
-  const job = schedule.scheduleJob('0 17 * * *', function() {
+  const job = schedule.scheduleJob('* 16 * * *', function() {
     // today's date
     const today = moment().format('MMM D, YYYY');
 
@@ -14,10 +14,7 @@ module.exports = (schedule, mailgun, mongoose, moment) => {
         // iterate over all reminders
         for (let j = 0; j < 365; j++) {
           // if today's day matches the sendDate AND today's reminder has text
-          if (
-            user[i].reminders[j].sendDate === today &&
-            user[i].reminders[j].text
-          ) {
+          if (user[i].reminders[j].sendDate === today && user[i].reminders[j].text) {
             // build email's html, decrypt the message
             const output = `
               <h4>New 365 Reasons Why message from ${user[i].givenName}!</h4>
@@ -29,9 +26,7 @@ module.exports = (schedule, mailgun, mongoose, moment) => {
               from: `${user[i].givenName} <${user[i].email}>`,
               to: user[i].recipient,
               subject: 'New Message From 365 Reasons Why!',
-              text: `New 365 Reasons Why message from ${
-                user[i].givenName
-              }: ${decrypt(user[i].reminders[j].text)}`,
+              text: `New 365 Reasons Why message from ${user[i].givenName}: ${decrypt(user[i].reminders[j].text)}`,
               html: output
             };
             //send message via mailgun
@@ -39,7 +34,7 @@ module.exports = (schedule, mailgun, mongoose, moment) => {
               if (err) {
                 console.log('ERROR: ', err);
               } else {
-                console.log('BODY: ', body);
+                console.log('Email Sent ✉️ ✉️ ✉️ : ', body);
               }
             });
           }

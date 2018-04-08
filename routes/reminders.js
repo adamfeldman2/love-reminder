@@ -38,9 +38,7 @@ module.exports = (app, bodyParser, mongoose) => {
     // encrypt all text in updatedRemindersArr before saving to database
     for (let i = 0; i < updatedRemindersArr.reminders.length; i++) {
       if (updatedRemindersArr.reminders[i].text) {
-        updatedRemindersArr.reminders[i].text = encrypt(
-          updatedRemindersArr.reminders[i].text
-        );
+        updatedRemindersArr.reminders[i].text = encrypt(updatedRemindersArr.reminders[i].text);
       }
     }
 

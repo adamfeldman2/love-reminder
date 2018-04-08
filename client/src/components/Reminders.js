@@ -5,11 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import ReminderInput from './ReminderInput';
 import SaveProgressButton from './SaveProgressButton';
-import {
-  storeReminders,
-  startStoreReminders,
-  remindersSaved
-} from '../actions/reminders';
+import { storeReminders, startStoreReminders, remindersSaved } from '../actions/reminders';
 import momentSafeJSDate from '../utils/momentSafeJSDate';
 
 class Reminders extends React.Component {
@@ -64,17 +60,10 @@ class Reminders extends React.Component {
       inputs.push(
         <ReminderInput
           handleInputChange={(e) => this.handleInputChange(e, `day${i + 1}`)}
-          placeholder={
-            this.state.reminders[0].sendDate
-              ? this.state.reminders[i].sendDate
-              : `Day ${i + 1}`
-          }
+          placeholder={this.state.reminders[0].sendDate ? this.state.reminders[i].sendDate : `Day ${i + 1}`}
           key={i}
           value={this.state.reminders[i].text}
-          disabled={
-            moment().diff(momentSafeJSDate(this.state.reminders[i].sendDate)) >
-            0
-          }
+          disabled={moment().diff(momentSafeJSDate(this.state.reminders[i].sendDate)) > 0}
         />
       );
     }
@@ -120,9 +109,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="1-72"
           >
-            <div className="wrapper">
-              {this.state.tab1Active && this.buildInputs(1, 72)}
-            </div>
+            <div className="wrapper">{this.state.tab1Active && this.buildInputs(1, 72)}</div>
           </Tab>
 
           {/* 73-145 */}
@@ -135,9 +122,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="73-145"
           >
-            <div className="wrapper">
-              {this.state.tab2Active && this.buildInputs(73, 145)}
-            </div>
+            <div className="wrapper">{this.state.tab2Active && this.buildInputs(73, 145)}</div>
           </Tab>
 
           {/* 146-218 */}
@@ -150,9 +135,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="146-218"
           >
-            <div className="wrapper">
-              {this.state.tab3Active && this.buildInputs(146, 218)}
-            </div>
+            <div className="wrapper">{this.state.tab3Active && this.buildInputs(146, 218)}</div>
           </Tab>
 
           {/* 219-291 */}
@@ -165,9 +148,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="219-291"
           >
-            <div className="wrapper">
-              {this.state.tab4Active && this.buildInputs(219, 291)}
-            </div>
+            <div className="wrapper">{this.state.tab4Active && this.buildInputs(219, 291)}</div>
           </Tab>
 
           {/* 292-365 */}
@@ -180,9 +161,7 @@ class Reminders extends React.Component {
             style={tabStyle}
             label="292-365"
           >
-            <div className="wrapper">
-              {this.state.tab5Active && this.buildInputs(292, 365)}
-            </div>
+            <div className="wrapper">{this.state.tab5Active && this.buildInputs(292, 365)}</div>
           </Tab>
         </Tabs>
 

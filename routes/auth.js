@@ -8,13 +8,9 @@ module.exports = (app, passport, mongoose) => {
     })
   );
 
-  app.get(
-    '/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/' }),
-    (req, res) => {
-      res.redirect('/dashboard');
-    }
-  );
+  app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+    res.redirect('/dashboard');
+  });
 
   app.get('/api/logout', (req, res) => {
     req.logout();
