@@ -3,7 +3,8 @@ module.exports = (schedule, mailgun, mongoose, moment) => {
   const decrypt = require('../utils/crypt').decrypt;
 
   // set job's schedule
-  const job = schedule.scheduleJob('0 22 * * *', function() {
+  const job = schedule.scheduleJob('23-24 12-13 * * *', function() {
+    console.log('THIS IS WHERE THE JOB WAS SCHEDULED 🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝🌝');
     // today's date
     const today = moment().format('MMM D, YYYY');
 
